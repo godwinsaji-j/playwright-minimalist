@@ -1,4 +1,5 @@
 // @ts-check
+import fs from 'fs';
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -37,11 +38,12 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { 
+      use: {
         ...devices['Desktop Chrome'],
         channel: "chrome",
-        headless: false
-       },
+        headless: false,
+        storageState: fs.existsSync('state-storage/state-storage.json') ? 'state-storage/state-storage.json' : undefined
+      },
     },
 
     // {
